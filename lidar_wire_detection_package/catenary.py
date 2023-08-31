@@ -19,7 +19,7 @@ def _catenary_function(x, y0, c, x0):
         array_like: Calculated y values using the catenary function.
     """
 
-    return y0 + c * np.cosh((x - x0) / c)
+    return y0 + c * (np.cosh((x - x0) / c)-1)
 
 def calculate_assigned_catenaries(df_coordinates):
     """

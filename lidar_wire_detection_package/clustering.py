@@ -81,7 +81,7 @@ def clustering(df):
     Performs clustering on the given DataFrame using DBSCAN and Hough transform-based sub-clustering.
 
     Args:
-        df (DataFrame): Input data with 'x' and 'z' columns corresponding to coordinates.
+        df (DataFrame): Input data with 'x', 'y' and 'z' columns corresponding to coordinates.
 
     Returns:
         DataFrame: The input data with additional 'cluster' and 'cluster_advanced' columns.
@@ -103,9 +103,10 @@ def clustering(df):
         point_to_cluster = _hough_transform_clustering(cluster_data)
 
         for line_idx, cluster_indices in point_to_cluster.items():
-            cluster_id = df_coordinates.loc[cluster_indices[0], 'cluster']
-            advanced_cluster_id = f'Cluster_{cluster_id}_{line_idx}'
-            df_coordinates.loc[cluster_indices, 'cluster_advanced'] = advanced_cluster_id
+            if cluster_indices:
+                cluster_id = df_coordinates.loc[cluster_indices[0], 'cluster']
+                advanced_cluster_id = f'Cluster_{cluster_id}_{line_idx}'
+                df_coordinates.loc[cluster_indices, 'cluster_advanced'] = advanced_cluster_id
 
     splines = []
 
