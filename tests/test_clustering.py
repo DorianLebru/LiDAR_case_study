@@ -54,7 +54,7 @@ class TestWireDetection(unittest.TestCase):
     def generate_noisy_points_3d(self, cluster_id, num_points, x_range, y_range, noise_factor, x0, y0, c):
         x_values = np.linspace(x_range[0], x_range[1], num_points)
         y_values = np.random.uniform(y_range[0], y_range[1], num_points)
-        z_values = self.catenary_function(x_values, y0, c, x0)
+        z_values = self.catenary_function(x_values, y0, c, x0) + np.random.normal(0, noise_factor, num_points)
         return pd.DataFrame({'x': x_values, 'y': y_values, 'z': z_values, 'cluster_id': cluster_id})
 
 
